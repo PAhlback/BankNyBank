@@ -45,7 +45,6 @@ namespace BankNyBank
                     }
                 }
             }
-            
         }
 
         private static void CreateUser(BankContext context)

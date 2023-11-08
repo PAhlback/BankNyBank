@@ -21,7 +21,7 @@ namespace BankNyBank.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BankBootstrap.Models.Account", b =>
+            modelBuilder.Entity("BankNyBank.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace BankNyBank.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("BankBootstrap.Models.User", b =>
+            modelBuilder.Entity("BankNyBank.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,9 +67,9 @@ namespace BankNyBank.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BankBootstrap.Models.Account", b =>
+            modelBuilder.Entity("BankNyBank.Models.Account", b =>
                 {
-                    b.HasOne("BankBootstrap.Models.User", "User")
+                    b.HasOne("BankNyBank.Models.User", "User")
                         .WithMany("Accounts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -78,7 +78,7 @@ namespace BankNyBank.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BankBootstrap.Models.User", b =>
+            modelBuilder.Entity("BankNyBank.Models.User", b =>
                 {
                     b.Navigation("Accounts");
                 });

@@ -30,5 +30,20 @@ namespace BankNyBank.Utilites
             }
             return true;
         }
+
+        public static bool RemoveUser(BankContext context, User user)
+        {
+            context.Users.Remove(user);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error removing user: {e}");
+                return false;
+            }
+            return true;
+        }
     }
 }

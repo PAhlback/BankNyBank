@@ -30,5 +30,31 @@ namespace BankNyBank.Utilites
             }
             return true;
         }
+
+        public static void DisplayAccounts(BankContext context)
+        {
+            {
+                var displayUserAccounts = context.Accounts
+                    .Select(a => new
+                    {
+                        a.Name,
+                        a.Balance
+                    })
+                    .ToList();
+
+                Console.Clear();
+
+                foreach (var accountDetails in displayUserAccounts)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Your current accounts and balance:");
+                    Console.WriteLine();
+                    Console.WriteLine("==============================================");
+                    Console.WriteLine($"Account name: {accountDetails.Name}\t Balance: {accountDetails.Balance}");
+                    Console.WriteLine("==============================================");
+                    Console.WriteLine();
+                }
+            }
+        }
     }
 }

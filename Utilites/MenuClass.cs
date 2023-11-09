@@ -13,48 +13,52 @@ namespace BankNyBank.Utilites
     {
         public static void MainMenu(BankContext context)
         {
+            // Run this on your first run
+            //User admin = new User()
+            //{
+            //    Name = "admin",
+            //    Pin = "1234"
+            //};
+            //context.Users.Add(admin);
+            //context.SaveChanges();
+            //Console.ReadLine();
+
             // Add while loop
             Console.WriteLine("Welcome to bankbank!");
             Console.WriteLine("Please log in");
 
-            
-
             // Check user log in input method
+            User user = UserAuthentication.CheckLogIn(context);
 
-            
             // Code here for user login ******
-            UserMenu(context);
-            
+            DisplayMenu(context, user);
+            //UserMenu(context);
         }
 
-        static void UserMenu(BankContext context)
+        static void UserMenu(BankContext context, User user)
         {
 
         }
 
-        static User CheckLogIn(BankContext context)
+        static void DisplayMenu(BankContext context, User user)
         {
-            while (true)
+            if (user.Name == "admin")
             {
-                Console.Write("Enter user name: ");
-                string userName = Console.ReadLine();
-
-                Console.Write("Enter pin: ");
-                string pin = Console.ReadLine();
-
-                User user = context.Users
-                    .Where(u => u.Name == userName)
-                    .SingleOrDefault();
-
-                if(user == null)
-                {
-
-                }
-
-                Console.WriteLine("No such user in the vault. Try again");
-
+                AdminFunctions.DoAdminTasks();
             }
-            
-        } 
+            else
+            {
+                UserMenu(context, user);
+            }
+        }
+
+        static void AddAccountToUser(BankContext context, User user)
+        {
+
+            // Add an account for the user
+            Account userAccount = new Account { UserId = user.Id, Name = "Default", Balance = 0.0 };
+            context.Accounts.Add(userAccount);
+            context.SaveChanges();
+        }
     }
 }

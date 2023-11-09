@@ -10,15 +10,7 @@ namespace BankNyBank
         {
             using (BankContext context = new BankContext())
             {
-                //User admin = new User()
-                //{
-                //    Name = "admin",
-                //    Pin = "1234"
-                //};
-                //context.Users.Add(admin);
-                //context.SaveChanges();
-                //Console.ReadLine();
-                MenuClass.MainMenu(context);
+               MenuClass.MainMenu(context);
             }
 
         }

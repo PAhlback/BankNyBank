@@ -11,7 +11,7 @@ namespace BankNyBank
 {
     internal static class AdminFunctions
     {
-        public static void DoAdminTasks()
+        public static void AdminMenu()
         {
             using(BankContext context = new BankContext())
             {
@@ -25,10 +25,13 @@ namespace BankNyBank
                     {
                         Console.WriteLine($"{user.Name}");
                     }
+                    Console.WriteLine();
                     Console.WriteLine($"Total number of users = {users.Count()}");
+                    Console.WriteLine();
                     Console.WriteLine("c to create new user");
                     Console.WriteLine("r to remove user");
                     Console.WriteLine("x to exit");
+                    Console.WriteLine();
                     Console.Write("Enter command: ");
                     string command = Console.ReadLine().ToLower();
 
@@ -91,6 +94,7 @@ namespace BankNyBank
                 Console.WriteLine($"{i}. {user.Name}");
                 i++;
             }
+
             Console.Write("Select user to remove: ");
             int removeIndex = int.Parse(Console.ReadLine()) - 1;
 
@@ -98,17 +102,36 @@ namespace BankNyBank
             Console.Write("Y/N: ");
             string yesNo = Console.ReadLine().ToLower();
             bool success = false;
+            int countTries = 0;
 
-            switch (yesNo)
+            // Tries to remove user from database. If successful, success message is shown and user is removed.
+            // Otherwise prints an error message, and clarifies that the user was not added.
+            // The switch checks for the correct input 5 times and if the input is invalid, the admin is sent
+            // back to the admin menu.
+            while (!success)
             {
-                case "y":
-                    success = DbHelper.RemoveUser(context, users[removeIndex]);
-                    break;
-                case "n":
-                    Console.WriteLine("No user removed");
-                    Console.WriteLine("Press enter to return to admin menu");
-                    Console.ReadLine();
-                    return;
+                switch (yesNo)
+                {
+                    case "y":
+                        success = DbHelper.RemoveUser(context, users[removeIndex]);
+                        break;
+                    case "n":
+                        Console.WriteLine("No user removed");
+                        Console.WriteLine("Press enter to return to admin menu");
+                        Console.ReadLine();
+                        return;
+                    default:
+                        if (countTries > 4)
+                        {
+                            Console.WriteLine("Too many invalid inputs. Returning to menu...");
+                            Thread.Sleep(2500);
+                            return;
+                        }
+                        Console.WriteLine("Invalid input. Try again: ");
+                        countTries++;
+                        yesNo = Console.ReadLine();
+                        break;
+                }
             }
 
             if (success)

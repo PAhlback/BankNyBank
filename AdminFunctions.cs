@@ -25,14 +25,11 @@ namespace BankNyBank
                     {
                         Console.WriteLine($"{user.Name}");
                     }
-                    Console.WriteLine();
-                    Console.WriteLine($"Total number of users = {users.Count()}");
-                    Console.WriteLine();
-                    Console.WriteLine("c to create new user");
+                    Console.WriteLine($"\nTotal number of users = {users.Count()}");
+                    Console.WriteLine("\nc to create new user");
                     Console.WriteLine("r to remove user");
                     Console.WriteLine("x to exit");
-                    Console.WriteLine();
-                    Console.Write("Enter command: ");
+                    Console.Write("\nEnter command: ");
                     string command = Console.ReadLine().ToLower();
 
                     switch(command)
@@ -44,8 +41,7 @@ namespace BankNyBank
                             RemoveUser(context, users);
                             break;
                         case "x":
-                            Console.WriteLine();
-                            Console.WriteLine("Good bye!");
+                            Console.WriteLine("\nFarewell!");
                             Thread.Sleep(1000);
                             return;
                         default:

@@ -44,7 +44,7 @@ namespace BankNyBank.Utilites
         {
             if (user.Name == "admin")
             {
-                AdminFunctions.DoAdminTasks();
+                AdminFunctions.AdminMenu();
             }
             else
             {

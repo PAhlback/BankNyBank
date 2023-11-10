@@ -31,6 +31,7 @@ namespace BankNyBank.Utilites
             return true;
         }
 
+
         public static void DisplayAccounts(BankContext context)
         {
             {
@@ -55,6 +56,20 @@ namespace BankNyBank.Utilites
                     Console.WriteLine();
                 }
             }
+
+        public static bool RemoveUser(BankContext context, User user)
+        {
+            context.Users.Remove(user);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error removing user: {e}");
+                return false;
+            }
+            return true;
         }
     }
 }

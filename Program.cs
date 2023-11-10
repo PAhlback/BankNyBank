@@ -10,9 +10,11 @@ namespace BankNyBank
         {
             using (BankContext context = new BankContext())
             {
-               MenuClass.MainMenu(context);
+                MenuClass.MainMenu(context);
             }
 
         }
+
     }
+
 }

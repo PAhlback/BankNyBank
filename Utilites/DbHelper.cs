@@ -56,6 +56,7 @@ namespace BankNyBank.Utilites
                     Console.WriteLine();
                 }
             }
+        }
 
         public static bool RemoveUser(BankContext context, User user)
         {

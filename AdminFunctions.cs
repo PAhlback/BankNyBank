@@ -20,27 +20,35 @@ namespace BankNyBank
                     Console.Clear();
                     List<User> users = DbHelper.GetAllUsers(context);
 
-                    Console.WriteLine("Current users in system: ");
-                    foreach (User user in users)
+                    string pageHeader = "~~~~ Admin menu ~~~~";
+                    string[] menuOptions =
                     {
-                        Console.WriteLine($"{user.Name}");
-                    }
-                    Console.WriteLine($"\nTotal number of users = {users.Count()}");
-                    Console.WriteLine("\nc to create new user");
-                    Console.WriteLine("r to remove user");
-                    Console.WriteLine("x to exit");
-                    Console.Write("\nEnter command: ");
-                    string command = Console.ReadLine().ToLower();
+                        "Show users",
+                        "Create user",
+                        "Remove user",
+                        "Log out"
+                    };
 
-                    switch(command)
+                    //Console.WriteLine("\nc to create new user");
+                    //Console.WriteLine("r to remove user");
+                    //Console.WriteLine("x to exit");
+                    //Console.Write("\nEnter command: ");
+                    //string command = Console.ReadLine().ToLower();
+
+                    int command = MenuClass.DisplayAndGetMenuChoice(pageHeader, menuOptions);
+
+                    switch (command)
                     {
-                        case "c":
+                        case 1:
+                            DisplayUsers(context, users);
+                            break;
+                        case 2:
                             CreateUser(context);
                             break;
-                        case "r":
+                        case 3:
                             RemoveUser(context, users);
                             break;
-                        case "x":
+                        case 4:
                             Console.WriteLine("\nFarewell!");
                             Thread.Sleep(1000);
                             return;
@@ -50,6 +58,18 @@ namespace BankNyBank
                     }
                 }
             }
+        }
+
+        private static void DisplayUsers(BankContext context, List<User> users)
+        {
+            Console.WriteLine("Current users in system: ");
+            foreach (User user in users)
+            {
+                Console.WriteLine($"{user.Name}");
+            }
+            Console.WriteLine($"\nTotal number of users = {users.Count()}");
+            Console.WriteLine("Press enter to return to admin menu");
+            Console.ReadLine();
         }
 
         private static void CreateUser(BankContext context)

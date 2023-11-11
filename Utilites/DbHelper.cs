@@ -31,7 +31,6 @@ namespace BankNyBank.Utilites
             return true;
         }
 
-
         public static void DisplayAccounts(BankContext context)
         {
             {

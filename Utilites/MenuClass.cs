@@ -36,9 +36,9 @@ namespace BankNyBank.Utilites
 
         static void UserMenu(BankContext context, User user)
         {
-            string pageHeader = $"~~~~ Welcome, {user.Name} ~~~~" ;
-            string[] menuOptions = 
-            { 
+            string pageHeader = $"~~~~ Welcome, {user.Name} ~~~~";
+            string[] menuOptions =
+            {
                 "View accounts and balance",
                 "Transfer between accounts",
                 "Withdraw",
@@ -50,6 +50,7 @@ namespace BankNyBank.Utilites
             while (true)
             {
                 int choice = DisplayAndGetMenuChoice(pageHeader, menuOptions);
+                Console.CursorVisible = true;
 
                 switch (choice)
                 {
@@ -79,9 +80,9 @@ namespace BankNyBank.Utilites
                 }
                 // Remove when all cases are implemented
                 Console.ReadLine();
-                
+
             }
-            
+
         }
 
         static void DisplayMenu(BankContext context, User user)
@@ -105,31 +106,27 @@ namespace BankNyBank.Utilites
             context.SaveChanges();
         }
 
-        // Method that allows for selecting in the menu using arrow keys. Can (probably) not be broken
-        // due to invalid input. Scales with amount of menu options. 
         public static int DisplayAndGetMenuChoice(string pageHeader, string[] menuoptions)
         {
-            // Menu choice index starts at 1 (corresponding row, including page header).
+            // Set the cursor visibility to false for a cleaner user interface.
+            Console.CursorVisible = false;
+
+            // Initialize the selected menu option index
             int menuHeight = menuoptions.Length;
-            int y = 1;
+            int y = 0;
 
-            Console.SetCursorPosition(0, 0);
+            Console.Clear();
+            Console.WriteLine(pageHeader);
 
-            // Method that clears the previous menu, then prints the page header and sets the arrow at the
-            // first position.
-            WriteMethod(pageHeader, y);
-
-            // This while loop takes the user input and, if valid, moves the arrow in the options menu.
-            // It prints the menu options, then takes the input. Input can only be arrow up and down, or enter.
-            // If the input is enter the method returns that choice (index starts at 1). If it's up or down, it 
-            // moves the arrow. The arrow can not go outside the span for the options. It can only move between row 1
-            // and the last row with an option (so if there are 4 options, the arrow can move between row 1-4).
+            // Main loop for handling user input and menu navigation
+            // Loop is versatile and can work with many different length menus
             while (true)
             {
-                // Prints the menu options
+                // Print the menu options with the arrow indicating the selected option.
                 for (int i = 0; i < menuoptions.Length; i++)
                 {
-                    Console.SetCursorPosition(3, i + 1);
+                    Console.SetCursorPosition(0, i + 2);
+                    Console.Write(i == y ? "=>" : "  ");
                     Console.WriteLine(menuoptions[i]);
                 }
                 if (Console.KeyAvailable)
@@ -139,40 +136,30 @@ namespace BankNyBank.Utilites
                     if (command == ConsoleKey.Enter)
                     {
                         Console.Clear();
-                        return y;
+                        return y + 1;
                     }
                     // Switch that incrementes or decrements the y axis of the arrow.
                     switch (command)
                     {
                         case ConsoleKey.UpArrow:
-                            if (y > 1)
+                            if (y > 0)
                             {
                                 y--;
                             }
                             break;
                         case ConsoleKey.DownArrow:
-                            if (y < menuHeight)
+                            if (y < menuHeight - 1)
                             {
                                 y++;
                             }
                             break;
                     }
-                    WriteMethod(pageHeader, y);
                 }
                 // If no input is detected within 100 milliseconds, the loop starts over.
                 else
                 {
                     Thread.Sleep(100);
                 }
-            }
-
-            // Method that clears the menu and prints a new menu with the arrow at the new place.
-            static void WriteMethod(string pageHeader, int y = 1)
-            {
-                Console.Clear();
-                Console.WriteLine(pageHeader);
-                Console.SetCursorPosition(0, y);
-                Console.Write("=>");
             }
         }
     }

@@ -72,8 +72,8 @@ namespace BankNyBank
             
             Console.WriteLine("Create user");
             Console.WriteLine("Enter to return to admin menu");
-            Console.WriteLine("User name must be longer than 3 characters");
-            Console.Write("\nEnter user name: ");
+            Console.WriteLine("Username must be longer than 3 characters");
+            Console.Write("\nEnter username: ");
             string userName = Console.ReadLine();
 
             if (userName == "")
@@ -85,7 +85,7 @@ namespace BankNyBank
 
             while (context.Users.Any(u => u.Name == userName) || userName.Length < 3)
             {
-                Console.WriteLine("User name already exists, or is shorter than 3 characters");
+                Console.WriteLine("Username already exists, or is shorter than 3 characters");
                 Console.Write("Enter user name: ");
                 userName = Console.ReadLine();
             }
@@ -131,10 +131,10 @@ namespace BankNyBank
             bool success = false;
             int countTries = 0;
 
-            // Tries to remove user from database. If successful, success message is shown and user is removed.
-            // Otherwise prints an error message, and clarifies that the user was not added.
-            // The switch checks for the correct input 5 times and if the input is invalid, the admin is sent
-            // back to the admin menu.
+            /* Tries to remove user from database. If successful, success message is shown and user is removed.
+             * Otherwise prints an error message, and clarifies that the user was not added.
+             * The switch checks for the correct input 5 times and if the input is invalid, the admin is sent
+             * back to the admin menu.*/
             while (!success)
             {
                 switch (yesNo)

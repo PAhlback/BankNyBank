@@ -122,9 +122,10 @@ namespace BankNyBank.Utilites
 
 
 
-        public static void DisplayAccounts(BankContext context)
+        public static void DisplayAccounts(BankContext context, User user)
         {
             var displayUserAccounts = context.Accounts
+                    .Where(u => u.User.Id == user.Id)
                     .Select(a => new
                     {
                         a.Name,

@@ -45,7 +45,7 @@ namespace BankNyBank.Utilites
                 switch (choice)
                 {
                     case 1:
-                        DbHelper.DisplayAccounts(context);
+                        DbHelper.DisplayAccounts(context, user);
                         break;
                     case 2:
                         // Transfer between accounts
@@ -138,7 +138,7 @@ namespace BankNyBank.Utilites
                             break;
                     }
                 }
-                // If no input is detected within 100 milliseconds, the loop starts over.
+                // If no input is detected within 100 millicooldown, the loop starts over.
                 else
                 {
                     Thread.Sleep(100);

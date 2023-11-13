@@ -8,9 +8,11 @@ namespace BankNyBank
     {
         static void Main(string[] args)
         {
+            
             using (BankContext context = new BankContext())
             {
                 MenuClass.MainMenu(context);
+                
             }
 
         }

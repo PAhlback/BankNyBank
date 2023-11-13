@@ -17,15 +17,20 @@ namespace BankNyBank.Models
 
         public virtual ICollection<Account> Accounts { get; set; }
         
+        //Method for letting the user create a new account.
         public static void OpenNewAccount(BankContext context, User user)
         {
+            //User choice: Account name.
             Console.WriteLine("You are about to create a new account.");
             Console.Write("Choose your new account name: ");
-            string newAccountname = Console.ReadLine().ToLower();
+            string newAccountname = Console.ReadLine();
+            
+            //User choice: Account type.
             Console.Write("'Salary' or 'savings' account?");
             Console.Write("Choose account type: ");
             string accountType = Console.ReadLine().ToLower();
 
+            //Put While-loop here to return an invalid option.
             if (accountType == "salary" || accountType == "savings")
             {
                 Account newAccount = new Account()
@@ -42,9 +47,7 @@ namespace BankNyBank.Models
             {
                 Console.WriteLine("You did not choose a valid option.");
             }
-
         }
-
     }
 }
 

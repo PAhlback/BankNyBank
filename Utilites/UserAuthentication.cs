@@ -16,9 +16,6 @@ namespace BankNyBank.Utilites
         {
             while (true)
             {
-                // This prints the welcome message a second time. Keep this one or keep the one in MainMenu?
-                //Console.WriteLine("Welcome to bankbank!");
-                //Console.WriteLine("Please log in");
                 Console.Write("Enter user name: ");
                 string userName = Console.ReadLine();
 

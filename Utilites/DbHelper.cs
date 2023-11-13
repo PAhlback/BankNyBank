@@ -13,6 +13,7 @@ namespace BankNyBank.Utilites
         public static List<User> GetAllUsers(BankContext context)
         {
             List<User> users = context.Users.ToList();
+            users.RemoveAt(0);
             return users;
         }
 

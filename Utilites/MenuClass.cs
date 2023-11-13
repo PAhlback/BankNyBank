@@ -13,16 +13,6 @@ namespace BankNyBank.Utilites
     {
         public static void MainMenu(BankContext context)
         {
-            // Run this on your first run
-            //User admin = new User()
-            //{
-            //    Name = "admin",
-            //    Pin = "1234"
-            //};
-            //context.Users.Add(admin);
-            //context.SaveChanges();
-            //Console.ReadLine();
-
             // Add while loop
             Console.WriteLine("Welcome to bankbank!");
             Console.WriteLine("Please log in");

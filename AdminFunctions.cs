@@ -19,7 +19,6 @@ namespace BankNyBank
                 {
                     Console.Clear();
                     List<User> users = DbHelper.GetAllUsers(context);
-                    users.RemoveAt(0);
 
                     string pageHeader = "~~~~ Admin menu ~~~~";
                     string[] menuOptions =
@@ -70,9 +69,26 @@ namespace BankNyBank
         private static void CreateUser(BankContext context)
         {
             Console.Clear();
+            
             Console.WriteLine("Create user");
-            Console.Write("Enter user name: ");
+            Console.WriteLine("Enter to return to admin menu");
+            Console.WriteLine("User name must be longer than 3 characters");
+            Console.Write("\nEnter user name: ");
             string userName = Console.ReadLine();
+
+            if (userName == "")
+            {
+                Console.WriteLine("Returning to admin menu");
+                Thread.Sleep(630);
+                return;
+            }
+
+            while (context.Users.Any(u => u.Name == userName) || userName.Length < 3)
+            {
+                Console.WriteLine("User name already exists, or is shorter than 3 characters");
+                Console.Write("Enter user name: ");
+                userName = Console.ReadLine();
+            }
 
             Random random = new Random();
             string pin = random.Next(1000, 10000).ToString();

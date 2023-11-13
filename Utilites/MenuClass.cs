@@ -60,5 +60,7 @@ namespace BankNyBank.Utilites
             context.Accounts.Add(userAccount);
             context.SaveChanges();
         }
+
+        
     }
 }

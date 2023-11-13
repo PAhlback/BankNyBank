@@ -16,21 +16,32 @@ namespace BankNyBank.Models
         public string Pin { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
-
-        internal static void OpenNewAccount(BankContext context, User user)
+        
+        public static void OpenNewAccount(BankContext context, User user)
         {
-            string newAccountname = Console.ReadLine();
-            string salaryOrSavingAccount = Console.ReadLine();
+            Console.WriteLine("You are about to create a new account.");
+            Console.Write("Choose your new account name: ");
+            string newAccountname = Console.ReadLine().ToLower();
+            Console.Write("'Salary' or 'savings' account?");
+            Console.Write("Choose account type: ");
+            string accountType = Console.ReadLine().ToLower();
 
-            Account newAccount = new Account()
+            if (accountType == "salary" || accountType == "savings")
             {
-                User = user,
-                Name = newAccountname,
-                Balance = 0,
-                AccountType = salaryOrSavingAccount
-            };
-            context.Accounts.Add(newAccount);
-            context.SaveChanges();
+                Account newAccount = new Account()
+                {
+                    User = user,
+                    Name = newAccountname,
+                    Balance = 0,
+                    AccountType = accountType
+                };
+                context.Accounts.Add(newAccount);
+                context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("You did not choose a valid option.");
+            }
 
         }
 

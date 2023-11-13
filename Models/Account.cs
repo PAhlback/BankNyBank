@@ -13,6 +13,7 @@ namespace BankNyBank.Models
         public int UserId { get; set; }
         public string Name { get; set; }
         public double Balance { get; set; }
+        public string Currency { get; set; }
 
         public virtual User User { get; set; }
 

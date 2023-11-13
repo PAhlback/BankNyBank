@@ -70,7 +70,7 @@ namespace BankNyBank.Utilites
                         break;
                     case 5:
                         // Open new account
-                        Console.WriteLine("Not implemented");
+                        DbHelper.AddAccount(context, user);
                         break;
                     case 6:
                         Console.WriteLine("Logging out...");
@@ -96,14 +96,7 @@ namespace BankNyBank.Utilites
             }
         }
 
-        static void AddAccountToUser(BankContext context, User user)
-        {
 
-            // Add an account for the user
-            Account userAccount = new Account { UserId = user.Id, Name = "Default", Balance = 0.0 };
-            context.Accounts.Add(userAccount);
-            context.SaveChanges();
-        }
 
         // Method that allows for selecting in the menu using arrow keys. Can (probably) not be broken
         // due to invalid input. Scales with amount of menu options. 

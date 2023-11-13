@@ -14,7 +14,7 @@ namespace BankNyBank
                 {
                     AddAdminUser(context);
                 }
-               MenuClass.MainMenu(context);
+                MenuClass.MainMenu(context);
             }
 
         }

@@ -61,7 +61,7 @@ namespace BankNyBank.Utilites
                         break;
                     case 5:
                         // Open new account
-                        Console.WriteLine("Not implemented");
+                        DbHelper.AddAccount(context, user);
                         break;
                     case 6:
                         Console.WriteLine("Logging out...");
@@ -87,14 +87,7 @@ namespace BankNyBank.Utilites
             }
         }
 
-        static void AddAccountToUser(BankContext context, User user)
-        {
 
-            // Add an account for the user
-            Account userAccount = new Account { UserId = user.Id, Name = "Default", Balance = 0.0 };
-            context.Accounts.Add(userAccount);
-            context.SaveChanges();
-        }
 
         public static int DisplayAndGetMenuChoice(string pageHeader, string[] menuoptions)
         {

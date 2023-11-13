@@ -19,6 +19,7 @@ namespace BankNyBank
                 {
                     Console.Clear();
                     List<User> users = DbHelper.GetAllUsers(context);
+                    users.RemoveAt(0);
 
                     string pageHeader = "~~~~ Admin menu ~~~~";
                     string[] menuOptions =
@@ -28,12 +29,6 @@ namespace BankNyBank
                         "Remove user",
                         "Log out"
                     };
-
-                    //Console.WriteLine("\nc to create new user");
-                    //Console.WriteLine("r to remove user");
-                    //Console.WriteLine("x to exit");
-                    //Console.Write("\nEnter command: ");
-                    //string command = Console.ReadLine().ToLower();
 
                     int command = MenuClass.DisplayAndGetMenuChoice(pageHeader, menuOptions);
 

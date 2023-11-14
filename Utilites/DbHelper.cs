@@ -60,7 +60,6 @@ namespace BankNyBank.Utilites
             return true;
         }
 
-
         public static void DisplayAccounts(BankContext context, User user)
         {
             var displayUserAccounts = context.Accounts
@@ -87,5 +86,3 @@ namespace BankNyBank.Utilites
         }
     }
 }
-
-

@@ -13,14 +13,6 @@ namespace BankNyBank.Utilites
     internal static class DbHelper
     {
 
-
-        public static void ReturnToMainMenuMessage()
-        {
-            Console.WriteLine("Press ENTER to return to the main menu...");
-        }
-
-
-
         public static List<User> GetAllUsers(BankContext context)
         {
             List<User> users = context.Users.ToList();
@@ -91,7 +83,7 @@ namespace BankNyBank.Utilites
             } while (string.IsNullOrWhiteSpace(accountName) || accountName.Length < 3);
 
             /* Enforce the user to choose a currency for the account
-             * Prompts the user until valid input is provided */
+               Prompts the user until valid input is provided */
             string currency;
             do
             {
@@ -117,7 +109,7 @@ namespace BankNyBank.Utilites
             context.SaveChanges();
 
             Console.WriteLine($"Successfully added account: {accountName}\n\n");
-            ReturnToMainMenuMessage();
+            Console.WriteLine("Press ENTER to return to main menu...");
         }
 
 
@@ -144,7 +136,7 @@ namespace BankNyBank.Utilites
                 Console.WriteLine($"Balance: {accountDetails.Balance} {accountDetails.Currency}");
                 Console.WriteLine("==============================================\n");
             }
-            ReturnToMainMenuMessage();
+            Console.WriteLine("Press ENTER to return to main menu...");
         }
     }
 }

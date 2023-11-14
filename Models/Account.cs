@@ -14,8 +14,8 @@ namespace BankNyBank.Models
         public string Name { get; set; }
         public double Balance { get; set; }
         public string Currency { get; set; }
+        public string AccountType { get; set; }
 
         public virtual User User { get; set; }
-
     }
 }

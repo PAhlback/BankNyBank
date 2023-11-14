@@ -16,7 +16,6 @@ namespace BankNyBank
                 }
                 MenuClass.MainMenu(context);
             }
-
         }
         static bool IsDatabaseEmpty(BankContext context)
         {

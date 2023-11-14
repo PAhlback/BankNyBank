@@ -47,7 +47,7 @@ namespace BankNyBank.Models
 
                 if (accountType != "salary" && accountType != "savings")
                 {
-                    Console.WriteLine("You did not choose a valid option. Please try again.");
+                    Console.WriteLine("\nYou did not choose a valid option. Please try again.\n");
                 }
             } while (accountType != "salary" && accountType != "savings");
 

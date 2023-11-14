@@ -14,7 +14,6 @@ namespace BankNyBank.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Pin { get; set; }
-
         public virtual ICollection<Account> Accounts { get; set; }
         
         //Method for letting the user create a new account.
@@ -33,9 +32,10 @@ namespace BankNyBank.Models
             //Put While-loop here to return an invalid option.
             if (accountType == "salary" || accountType == "savings")
             {
+
                 Account newAccount = new Account()
                 {
-                    User = user,
+                    UserId = user.Id,
                     Name = newAccountname,
                     Balance = 0,
                     AccountType = accountType
@@ -50,9 +50,3 @@ namespace BankNyBank.Models
         }
     }
 }
-
-//public int Id { get; set; }
-//public int UserId { get; set; }
-//public string Name { get; set; }
-//public double Balance { get; set; }
-//public virtual User User { get; set; }

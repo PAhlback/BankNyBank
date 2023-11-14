@@ -51,12 +51,26 @@ namespace BankNyBank.Models
                 }
             } while (accountType != "salary" && accountType != "savings");
 
+            string currency;
+            do
+            {
+                Console.WriteLine("Choose a currency for the account (SEK, EUR, USD):");
+                currency = Console.ReadLine().ToUpper();
+
+                if (currency != "SEK" && currency != "EUR" && currency != "USD")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid input.");
+                }
+            } while (currency != "SEK" && currency != "EUR" && currency != "USD");
+
             Account newAccount = new Account()
             {
                 UserId = user.Id,
                 Name = newAccountName,
                 Balance = 0,
                 AccountType = accountType,
+                Currency = currency,
             };
             context.Accounts.Add(newAccount);
             context.SaveChanges();

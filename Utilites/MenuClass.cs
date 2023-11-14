@@ -13,16 +13,6 @@ namespace BankNyBank.Utilites
     {
         public static void MainMenu(BankContext context)
         {
-            // Run this on your first run
-            User admin = new User()
-            {
-                Name = "admin",
-                Pin = "1234"
-            };
-            context.Users.Add(admin);
-            context.SaveChanges();
-            Console.ReadLine();
-
             // Add while loop
             Console.WriteLine("Welcome to bankbank!");
             Console.WriteLine("Please log in");
@@ -32,11 +22,56 @@ namespace BankNyBank.Utilites
 
             // Code here for user login ******
             DisplayMenu(context, user);
-            //UserMenu(context);
         }
 
         static void UserMenu(BankContext context, User user)
         {
+            string pageHeader = $"~~~~ Welcome, {user.Name} ~~~~";
+            string[] menuOptions =
+            {
+                "View accounts and balance",
+                "Transfer between accounts",
+                "Withdraw",
+                "Deposit",
+                "Open new account",
+                "Log out"
+            };
+
+            while (true)
+            {
+                int choice = DisplayAndGetMenuChoice(pageHeader, menuOptions);
+                Console.CursorVisible = true;
+
+                switch (choice)
+                {
+                    case 1:
+                        DbHelper.DisplayAccounts(context);
+                        break;
+                    case 2:
+                        // Transfer between accounts
+                        Console.WriteLine("Not implemented");
+                        break;
+                    case 3:
+                        // Withdraw from account
+                        Console.WriteLine("Not implemented");
+                        break;
+                    case 4:
+                        // Deposit to account
+                        Console.WriteLine("Not implemented");
+                        break;
+                    case 5:
+                        // Open new account
+                        Console.WriteLine("Not implemented");
+                        break;
+                    case 6:
+                        Console.WriteLine("Logging out...");
+                        Thread.Sleep(1000);
+                        return;
+                }
+                // Remove when all cases are implemented
+                Console.ReadLine();
+
+            }
 
         }
 
@@ -44,7 +79,7 @@ namespace BankNyBank.Utilites
         {
             if (user.Name == "admin")
             {
-                AdminFunctions.DoAdminTasks();
+                AdminFunctions.AdminMenu();
             }
             else
             {
@@ -61,6 +96,61 @@ namespace BankNyBank.Utilites
             context.SaveChanges();
         }
 
-        
+        public static int DisplayAndGetMenuChoice(string pageHeader, string[] menuoptions)
+        {
+            // Set the cursor visibility to false for a cleaner user interface.
+            Console.CursorVisible = false;
+
+            // Initialize the selected menu option index
+            int menuHeight = menuoptions.Length;
+            int y = 0;
+
+            Console.Clear();
+            Console.WriteLine(pageHeader);
+
+            // Main loop for handling user input and menu navigation
+            // Loop is versatile and can work with many different length menus
+            while (true)
+            {
+                // Print the menu options with the arrow indicating the selected option.
+                for (int i = 0; i < menuoptions.Length; i++)
+                {
+                    Console.SetCursorPosition(0, i + 2);
+                    Console.Write(i == y ? "=>" : "  ");
+                    Console.WriteLine(menuoptions[i]);
+                }
+                if (Console.KeyAvailable)
+                {
+                    // Takes input from user
+                    var command = Console.ReadKey().Key;
+                    if (command == ConsoleKey.Enter)
+                    {
+                        Console.Clear();
+                        return y + 1;
+                    }
+                    // Switch that incrementes or decrements the y axis of the arrow.
+                    switch (command)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (y > 0)
+                            {
+                                y--;
+                            }
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (y < menuHeight - 1)
+                            {
+                                y++;
+                            }
+                            break;
+                    }
+                }
+                // If no input is detected within 100 milliseconds, the loop starts over.
+                else
+                {
+                    Thread.Sleep(100);
+                }
+            }
+        }
     }
 }

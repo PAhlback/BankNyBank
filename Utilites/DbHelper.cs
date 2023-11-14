@@ -13,6 +13,7 @@ namespace BankNyBank.Utilites
         public static List<User> GetAllUsers(BankContext context)
         {
             List<User> users = context.Users.ToList();
+            users.RemoveAt(0);
             return users;
         }
 
@@ -26,6 +27,47 @@ namespace BankNyBank.Utilites
             catch (Exception e)
             {
                 Console.WriteLine($"Error adding user: {e}");
+                return false;
+            }
+            return true;
+        }
+
+        public static void DisplayAccounts(BankContext context)
+        {
+            {
+                var displayUserAccounts = context.Accounts
+                    .Select(a => new
+                    {
+                        a.Name,
+                        a.Balance
+                    })
+                    .ToList();
+
+                Console.Clear();
+
+                foreach (var accountDetails in displayUserAccounts)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Your current accounts and balance:");
+                    Console.WriteLine();
+                    Console.WriteLine("==============================================");
+                    Console.WriteLine($"Account name: {accountDetails.Name}\t Balance: {accountDetails.Balance}");
+                    Console.WriteLine("==============================================");
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        public static bool RemoveUser(BankContext context, User user)
+        {
+            context.Users.Remove(user);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error removing user: {e}");
                 return false;
             }
             return true;

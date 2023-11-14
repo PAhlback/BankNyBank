@@ -61,7 +61,7 @@ namespace BankNyBank.Utilites
                         break;
                     case 5:
                         // Open new account
-                        DbHelper.AddAccount(context, user);
+                        User.OpenNewAccount(context, user);
                         break;
                     case 6:
                         Console.WriteLine("Logging out...");

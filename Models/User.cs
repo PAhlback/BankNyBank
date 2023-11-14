@@ -68,7 +68,6 @@ namespace BankNyBank.Models
             Console.WriteLine("\nYou have successfully created a new account.");
             Console.WriteLine($"\tNew Account Information:\n\tName: {newAccountName}\n\tType: {accountType}.");
             Console.ReadKey();
-
         }
     }
 }

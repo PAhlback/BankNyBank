@@ -59,7 +59,7 @@ namespace BankNyBank.Utilites
                     .Select(a => new
                     {
                         a.Name,
-                        Balance = $"{a.Balance:N0}",
+                        Balance = $"{a.Balance:N2}",
                         a.Currency
                     })
                     .ToList();

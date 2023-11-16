@@ -1,5 +1,6 @@
 ﻿using BankNyBank.Data;
 using BankNyBank.Models;
+using BankNyBank.Utilites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +95,11 @@ namespace BankNyBank.Models
             Console.Clear();
             Console.WriteLine("\nYou have successfully created a new account.\n");
             Console.WriteLine($"\tNew Account Information:\n\t~~~~~~~~~~~~~~~~~~~~~~~~\n\tName: \t\t{newAccountName}\n\tType: \t\t{accountType}\n\tCurrency: \t{currency}");
+            Console.WriteLine("\nPress ENTER to return to main menu.");
             Console.ReadKey();
+            Console.WriteLine("Returning to main menu...");
+            Thread.Sleep(1000);
+            MenuClass.UserMenu(context, user);
         }
     }
 }

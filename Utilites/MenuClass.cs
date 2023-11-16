@@ -24,7 +24,7 @@ namespace BankNyBank.Utilites
             DisplayMenu(context, user);
         }
 
-        static void UserMenu(BankContext context, User user)
+        public static void UserMenu(BankContext context, User user)
         {
             string pageHeader = $"~~~~ Welcome, {user.Name} ~~~~";
             string[] menuOptions =
@@ -159,7 +159,7 @@ namespace BankNyBank.Utilites
                     .Select(a => new
                     {
                         a.Name,
-                        Balance = $"{a.Balance:N0}",
+                        Balance = $"{a.Balance:N2}",
                         a.Currency
                     })
                     .ToList();
@@ -210,7 +210,7 @@ namespace BankNyBank.Utilites
 
                     Console.WriteLine("\nPress ENTER to return to the main menu.");
                     Console.ReadKey();
-                    Console.WriteLine("Returning to the main menu...");
+                    Console.WriteLine("Returning to main menu...");
                     Thread.Sleep(1000);
                     UserMenu(context, user);
                 }
@@ -235,7 +235,7 @@ namespace BankNyBank.Utilites
                     .Select(a => new
                     {
                         a.Name,
-                        Balance = $"{a.Balance:N0}",
+                        Balance = $"{a.Balance:N2}",
                         a.Currency
                     })
                     .ToList();
@@ -292,7 +292,7 @@ namespace BankNyBank.Utilites
                             {
                                 Console.WriteLine("Invalid input. Please enter a withdrawal amount within your balance.");
                             }
-                            Console.WriteLine("\nPress ENTER to return to the main menu.");
+                            Console.WriteLine("\nPress ENTER to return to main menu.");
                             Console.ReadKey();
                             Console.WriteLine("Returning to the main menu...");
                             Thread.Sleep(1000);

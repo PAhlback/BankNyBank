@@ -13,14 +13,6 @@ namespace BankNyBank.Utilites
     internal static class DbHelper
     {
 
-
-        public static void ReturnToMainMenuMessage()
-        {
-            Console.WriteLine("Press ENTER to return to the main menu...");
-        }
-
-
-
         public static List<User> GetAllUsers(BankContext context)
         {
             List<User> users = context.Users.ToList();
@@ -82,7 +74,7 @@ namespace BankNyBank.Utilites
                 Console.WriteLine($"Balance: {accountDetails.Balance} {accountDetails.Currency}");
                 Console.WriteLine("==============================================\n");
             }
-            ReturnToMainMenuMessage();
+            Console.WriteLine("Press ENTER to return to main menu...");
         }
     }
 }

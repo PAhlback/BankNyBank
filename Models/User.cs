@@ -37,7 +37,8 @@ namespace BankNyBank.Models
                 {
                     Console.WriteLine("\nYou did not choose a valid option. Please try again.\n");
                 }
-            } while (accountType != "salary" && accountType != "savings");
+            } 
+            while (accountType != "salary" && accountType != "savings");
 
             do
             {
@@ -52,19 +53,16 @@ namespace BankNyBank.Models
                 }
                 else
                 {
-                    // Check if the desired account name already exists in the database
                     if (context.Accounts.Any(a => a.Name == newAccountName))
                     {
                         Console.Clear();
                         Console.WriteLine("Account name already exists. Please choose a different name.");
-                        newAccountName = null; // Set to null to repeat the loop
+                        newAccountName = null;
                     }
                 }
-            } while (string.IsNullOrWhiteSpace(newAccountName) || newAccountName.Length < 3);
+            } 
+            while (string.IsNullOrWhiteSpace(newAccountName) || newAccountName.Length < 3);
 
-
-            /* Enforce the user to choose a currency for the account
-               Prompts the user until valid input is provided */
             string currency;
             do
             {
@@ -77,7 +75,6 @@ namespace BankNyBank.Models
                     Console.WriteLine("Invalid input.");
                 }
             } while (currency != "SEK" && currency != "EUR" && currency != "USD");
-
 
             Console.Clear();
             Console.WriteLine($"\nYour account name will be called {newAccountName} with currency {currency}.\n(Press any key to continue.)");

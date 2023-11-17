@@ -75,7 +75,8 @@ namespace BankNyBank.Models
                     Console.Clear();
                     Console.WriteLine("Invalid input.");
                 }
-            } while (currency != "SEK" && currency != "EUR" && currency != "USD");
+            } 
+            while (currency != "SEK" && currency != "EUR" && currency != "USD");
 
             Console.Clear();
             Console.WriteLine($"\nYour account name will be called {newAccountName} with currency {currency}.\n(Press any key to continue.)");

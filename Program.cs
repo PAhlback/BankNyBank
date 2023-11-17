@@ -28,7 +28,7 @@ namespace BankNyBank
             context.Users.Add(adminUser);
             context.SaveChanges();
 
-            Console.WriteLine("Admin user added to the database on running the program for the first time.\n" +
+            Console.WriteLine("Admin user added to the database on finding the database empty.\n" +
                 "Name = admin\n" +
                 "Pin = 1234");
 

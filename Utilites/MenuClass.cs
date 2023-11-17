@@ -13,15 +13,36 @@ namespace BankNyBank.Utilites
     {
         public static void MainMenu(BankContext context)
         {
-            // Add while loop
-            Console.WriteLine("Welcome to bankbank!");
-            Console.WriteLine("Please log in");
+            string pageHeader = $" ~~~~ Welcome to bankbank! ~~~~\n" +
+                $"~~~~ Logging in or quitting ~~~~";
+            string[] menuOptions =
+            {
+                "Login",
+                "Quit"
+            };
 
-            // Check user log in input method
-            User user = UserAuthentication.CheckLogIn(context);
+            while (true)
+            {
+                int choice = DisplayAndGetMenuChoice(pageHeader, menuOptions);
+                Console.CursorVisible = true;
 
-            // Code here for user login ******
-            DisplayMenu(context, user);
+                switch (choice)
+                {
+                    case 1:
+                        Console.Clear();
+                        // Check user login input method
+                        User user = UserAuthentication.CheckLogIn(context);
+
+                        DisplayMenu(context, user);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Closing down...");
+                        Thread.Sleep(1000);
+                        Environment.Exit(0);
+                        return;
+                }
+            }
         }
 
         public static void UserMenu(BankContext context, User user)

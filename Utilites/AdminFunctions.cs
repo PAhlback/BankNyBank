@@ -1,19 +1,18 @@
 ﻿using BankNyBank.Data;
 using BankNyBank.Models;
-using BankNyBank.Utilites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankNyBank
+namespace BankNyBank.Utilites
 {
     internal static class AdminFunctions
     {
         public static void AdminMenu()
         {
-            using(BankContext context = new BankContext())
+            using (BankContext context = new BankContext())
             {
                 while (true)
                 {
@@ -29,7 +28,7 @@ namespace BankNyBank
                         "Log out"
                     };
 
-                    int command = MenuClass.DisplayAndGetMenuChoice(pageHeader, menuOptions);
+                    int command = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
 
                     switch (command)
                     {
@@ -69,7 +68,7 @@ namespace BankNyBank
         private static void CreateUser(BankContext context)
         {
             Console.Clear();
-            
+
             Console.WriteLine("Create user");
             Console.WriteLine("Enter to return to admin menu");
             Console.WriteLine("Username must be longer than 3 characters");

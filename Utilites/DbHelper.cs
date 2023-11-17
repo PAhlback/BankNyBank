@@ -20,7 +20,6 @@ namespace BankNyBank.Utilites
             return users;
         }
 
-
         public static bool AddUser(BankContext context, User user)
         {
             context.Users.Add(user);
@@ -35,7 +34,6 @@ namespace BankNyBank.Utilites
             }
             return true;
         }
-
 
         public static bool RemoveUser(BankContext context, User user)
         {
@@ -76,5 +74,19 @@ namespace BankNyBank.Utilites
             }
             Console.WriteLine("Press ENTER to return to main menu...");
         }
+
+        // GetAccount
+
+        // Save deposit/alter balance
+        public static bool DepositToAccount(BankContext context, Account account, double depositAmount)
+        {
+            // Try catch
+            account.Balance += depositAmount;
+            context.SaveChanges();
+            return true;
+        }
+
+
+        // Save withdraw/alter balance
     }
 }

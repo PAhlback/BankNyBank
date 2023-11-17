@@ -132,9 +132,9 @@ namespace BankNyBank
             int countTries = 0;
 
             /* Tries to remove user from database. If successful, success message is shown and user is removed.
-             * Otherwise prints an error message, and clarifies that the user was not added.
-             * The switch checks for the correct input 5 times and if the input is invalid, the admin is sent
-             * back to the admin menu.*/
+               Otherwise prints an error message, and clarifies that the user was not added.
+               The switch checks for the correct input 5 times and if the input is invalid, the admin is sent
+               back to the admin menu.*/
             while (!success)
             {
                 switch (yesNo)

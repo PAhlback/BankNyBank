@@ -49,7 +49,8 @@ namespace BankNyBank.Utilites
                         break;
                     case 2:
                         // Transfer between accounts
-                        Console.WriteLine("Not implemented");
+                        //Console.WriteLine("Not implemented");
+                        Account.TransferBetweenAccounts(context, user);
                         break;
                     case 3:
                         // Withdrawal
@@ -184,7 +185,7 @@ namespace BankNyBank.Utilites
                 int choice = DisplayAndGetMenuChoice(pageHeader, menuOptions);
                 Console.CursorVisible = true;
 
-                if (choice >= 1 && choice <= displayUserAccounts.Count)
+                if (choice >= 1 && choice <= displayUserAccounts.Count) // Choice kan inte vara mindre än 1
                 {
                     string selectedAccountName = displayUserAccounts[choice - 1].Name;
                     Console.WriteLine($"Selected account: {selectedAccountName}");
@@ -212,6 +213,8 @@ namespace BankNyBank.Utilites
                     Console.ReadKey();
                     Console.WriteLine("Returning to main menu...");
                     Thread.Sleep(1000);
+
+                    // Calling UserMenu from within the deposit menu, within the user menu. Same below.
                     UserMenu(context, user);
                 }
                 else if (choice == displayUserAccounts.Count + 2)

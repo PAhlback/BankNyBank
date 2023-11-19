@@ -43,7 +43,7 @@ namespace BankNyBank.Models
                         break;
                     case 2:
                         // Transfer between accounts
-                        Console.WriteLine("Not implemented");
+                        Account.TransferBetweenAccounts(context, user);
                         break;
                     case 3:
                         // Withdrawal

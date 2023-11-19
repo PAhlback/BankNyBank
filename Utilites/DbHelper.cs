@@ -73,6 +73,7 @@ namespace BankNyBank.Utilites
                 Console.WriteLine("==============================================\n");
             }
             Console.WriteLine("Press ENTER to return to main menu...");
+            Console.ReadLine();
         }
 
         // GetAccount
@@ -86,7 +87,13 @@ namespace BankNyBank.Utilites
             return true;
         }
 
-
         // Save withdraw/alter balance
+        public static bool WithdrawFromAccount(BankContext context, Account account, double withdrawalAmount)
+        {
+            // Add try catch
+            account.Balance -= withdrawalAmount;
+            context.SaveChanges();
+            return true;
+        }
     }
 }

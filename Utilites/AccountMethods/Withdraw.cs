@@ -48,7 +48,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 int choice = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
                 Console.CursorVisible = true;
 
-                if (choice >= 1 && choice <= displayUserAccounts.Count)
+                if (choice <= displayUserAccounts.Count)
                 {
                     string selectedAccountName = displayUserAccounts[choice - 1].Name;
                     Console.WriteLine($"Selected account: {selectedAccountName}");
@@ -68,8 +68,7 @@ namespace BankNyBank.Utilites.AccountMethods
                             if (double.TryParse(Console.ReadLine(), out double withdrawalAmount) && withdrawalAmount < selectedAccount.Balance)
                             {
                                 // Withdraw funds from the chosen account
-                                selectedAccount.Balance -= withdrawalAmount;
-                                context.SaveChanges();
+                                DbHelper.WithdrawFromAccount(context, selectedAccount, withdrawalAmount);
                                 Console.WriteLine($"Withdrawal successful.");
                                 Console.WriteLine($"New balance of account {selectedAccount.Name}: {selectedAccount.Balance:N2} {displayUserAccounts[choice - 1].Currency}");
                             }

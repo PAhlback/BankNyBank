@@ -67,10 +67,7 @@ namespace BankNyBank.Utilites
 
             foreach (var accountDetails in displayUserAccounts)
             {
-                Console.WriteLine("==============================================");
-                Console.WriteLine($"Account: {accountDetails.Name}");
-                Console.WriteLine($"Balance: {accountDetails.Balance} {accountDetails.Currency}");
-                Console.WriteLine("==============================================\n");
+                PrintOneAccount(accountDetails.Name, accountDetails.Balance, accountDetails.Currency);
             }
             Console.WriteLine("Press ENTER to return to main menu...");
             Console.ReadLine();
@@ -94,6 +91,14 @@ namespace BankNyBank.Utilites
             account.Balance -= withdrawalAmount;
             context.SaveChanges();
             return true;
+        }
+
+        public static void PrintOneAccount(string name, string balance, string currency)
+        {
+            Console.WriteLine("==============================================");
+            Console.WriteLine($"Account: {name}");
+            Console.WriteLine($"Balance: {balance} {currency}");
+            Console.WriteLine("==============================================\n");
         }
     }
 }

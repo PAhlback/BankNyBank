@@ -65,7 +65,7 @@ namespace BankNyBank.Utilites.AccountMethods
                             Console.WriteLine($"Current balance: {selectedAccount.Balance:N2} {displayUserAccounts[choice - 1].Currency}");
 
                             Console.Write("Please enter withdrawal amount: ");
-                            if (double.TryParse(Console.ReadLine(), out double withdrawalAmount) && withdrawalAmount < selectedAccount.Balance)
+                            if (double.TryParse(Console.ReadLine(), out double withdrawalAmount) && withdrawalAmount <= selectedAccount.Balance)
                             {
                                 // Withdraw funds from the chosen account
                                 DbHelper.WithdrawFromAccount(context, selectedAccount, withdrawalAmount);

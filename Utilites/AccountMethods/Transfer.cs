@@ -12,31 +12,39 @@ namespace BankNyBank.Utilites.AccountMethods
     {
         public static void TransferBetweenAccounts(BankContext context, User user)
         {
+            // Check if user wants to transfer to another user, and declares some variables that 
+            // are used later (and which needs to be used outside of where they are given values.
             string pageHeader = "Transfer to other user?";
             string[] menuOptions = { "Yes", "No" };
-            string msg;
 
             int toOtherUser = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
 
             User foreignUser = new User();
             Account acc2 = new Account();
 
+            // This while loop gets an account from another user. This could probably be it's own method, which
+            // returns the account, instead of sitting right here.
             while (toOtherUser == 1)
             {
+                // First declares some variables used to navigate the if statements in the while loop. Then goes through the 
+                // if statements. First it looks for the user. Then, when a user is found, gets an account from the user.
+                // If a user or account is not found, it gives the option of Trying again, exit or transfer within the users
+                // own accounts.
                 bool getUser = true;
                 string otherUserName = string.Empty;
+                int choice = 0;
+                bool getAccount = false;
+
+                string[] menuOptions2 = { "Try again", "Transfer between own accounts", "Exit" };
+
                 if (getUser)
                 {
                     Console.Write("Enter user name to transfer to: ");
                     otherUserName = Console.ReadLine();
                     foreignUser = UserAuthentication.FindUserByName(context, otherUserName);
                 }
-                
-                int choice = 0;
-                bool getAccount = false;
-                
-                string[] menuOptions2 = { "Try again", "Transfer between own accounts", "Exit" };
 
+                // Checks to make sure a user was found.
                 if (foreignUser == null) 
                 {
                     string pageHeader1 = $"Could not find user with name {otherUserName}";
@@ -57,6 +65,7 @@ namespace BankNyBank.Utilites.AccountMethods
                         .Where(a => a.User.Name == foreignUser.Name).ToList();
                     Account foundAccount = foreignAccounts.Find(a => a.Name == accountNameForeignUser);
 
+                    // Checks to make sure an account from the foreign user was found.
                     if (foundAccount.Name == null)
                     {
                         string pageHeader2 = $"Could not find account with name {accountNameForeignUser}";
@@ -85,7 +94,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 Console.Clear();
             }
 
-            msg = "~~~~ Select account to transfer from ~~~~";
+            string msg = "~~~~ Select account to transfer from ~~~~";
             Account acc1 = GetSingleAccountFromUsersAccounts(context, user, msg);
 
             if (toOtherUser == 2)

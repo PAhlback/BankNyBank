@@ -43,8 +43,8 @@ namespace BankNyBank.Models
                 else
                 {
                     Console.WriteLine("\nInvalid input. Transfer amount can only contain numbers.");
-                    Console.WriteLine("Please try again");
-                    Thread.Sleep(800);
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
                     Console.Clear();
                 }
                 // Does a check to see if the amount being transfered is a positive number,
@@ -53,9 +53,9 @@ namespace BankNyBank.Models
                 {
                     if (transferAmount <= 0 || transferAmount > acc1.Balance)
                     {
-                        Console.WriteLine("\nInvalid amount. Please enter amount within balance of account");
-                        Console.WriteLine("Please try again");
-                        Thread.Sleep(800);
+                        Console.WriteLine("\nInvalid amount. Please enter amount within balance of account.");
+                        Console.WriteLine("Press ENTER to continue");
+                        Console.ReadLine();
                         Console.Clear();
                     }
                     else

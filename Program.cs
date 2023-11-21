@@ -53,7 +53,10 @@ namespace BankNyBank
                 User user = UserAuthentication.CheckLogIn(context);
 
                 // Call 'AdminMenu' or 'UserMenu' depending on username
-                MenuManager.DisplayMenu(context, user);
+                if (user != null)
+                {
+                    MenuManager.DisplayMenu(context, user);
+                }
             }
         }
     }

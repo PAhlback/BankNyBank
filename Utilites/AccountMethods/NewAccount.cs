@@ -64,12 +64,13 @@ namespace BankNyBank.Utilites.AccountMethods
             do
             {
                 Console.WriteLine("Choose a currency for the account (SEK, EUR, USD):");
+                Console.Write("Currency: ");
                 currency = Console.ReadLine().ToUpper();
 
                 if (currency != "SEK" && currency != "EUR" && currency != "USD")
                 {
                     Console.Clear();
-                    Console.WriteLine("Invalid input.");
+                    Console.WriteLine("Invalid input, choose the correct currency availble.");
                     Console.ReadKey();
                 }
             }
@@ -78,6 +79,8 @@ namespace BankNyBank.Utilites.AccountMethods
             Console.Clear();
             Console.WriteLine($"\nYour account name will be called {newAccountName} with currency {currency}.\n(Press any key to continue.)");
             Console.ReadKey();
+            Console.WriteLine("Please wait.. Your account is being created...");
+            Thread.Sleep(3000);
 
             Account newAccount = new Account
             {

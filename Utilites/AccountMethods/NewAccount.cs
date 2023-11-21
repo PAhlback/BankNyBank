@@ -70,6 +70,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 {
                     Console.Clear();
                     Console.WriteLine("Invalid input.");
+                    Console.ReadKey();
                 }
             }
             while (currency != "SEK" && currency != "EUR" && currency != "USD");

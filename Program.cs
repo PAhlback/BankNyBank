@@ -8,6 +8,8 @@ namespace BankNyBank
     {
         static void Main(string[] args)
         {
+            Console.Title = "BankNyBank Corporation";
+            Console.ForegroundColor = ConsoleColor.Yellow;
             using (BankContext context = new BankContext())
             {
                 if (IsDatabaseEmpty(context))

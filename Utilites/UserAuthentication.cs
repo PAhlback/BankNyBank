@@ -87,7 +87,7 @@ namespace BankNyBank.Utilites
         }
 
 
-        private static User FindUserByName(BankContext context, string userName)
+        public static User FindUserByName(BankContext context, string userName)
         {
             return context.Users
                 .Where(u => u.Name == userName)

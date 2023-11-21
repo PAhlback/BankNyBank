@@ -27,6 +27,10 @@ namespace BankNyBank.Utilites.AccountMethods
             if (toOtherUser == 1)
             {
                 acc2 = GetOtherUsersAccount(context);
+                if (acc2.Name == "Return to menu")
+                {
+                    return;
+                }
             }
             
             string msg = "~~~~ Select account to transfer from ~~~~";
@@ -219,6 +223,7 @@ namespace BankNyBank.Utilites.AccountMethods
                         break;
                     case 3:
                         Console.Clear();
+                        returnAccount.Name = "Return to menu";
                         return returnAccount;
                 }
                 Console.Clear();

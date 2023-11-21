@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using System.Security.Principal;
@@ -64,14 +65,30 @@ namespace BankNyBank.Utilites
                     .ToList();
 
             Console.Clear();
-            Console.WriteLine("\nYour current accounts and balance:\n");
+
+            if (displayUserAccounts.Count > 1) 
+            {
+                Console.WriteLine($"\n{user.Name}'s current accounts and balances:\n");
+            }
+            else if (displayUserAccounts.Count == 1)
+            {
+                Console.WriteLine($"\n{user.Name}'s current account and balance:\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nNo accounts found for user {user.Name}.");
+            }            
 
             foreach (var accountDetails in displayUserAccounts)
             {
                 PrintOneAccount(accountDetails.Name, accountDetails.AccountType, accountDetails.Balance, accountDetails.Currency);
             }
-            Console.WriteLine("Press ENTER to return to main menu...");
-            Console.ReadLine();
+            // Wait for user to press the ENTER key
+            Console.WriteLine("\nPress ENTER to return to the main menu.");
+            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+            Console.WriteLine("Returning to the main menu...");
+            Thread.Sleep(1000);
+            return;
         }
 
         // Save deposit

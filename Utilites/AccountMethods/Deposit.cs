@@ -10,7 +10,7 @@ namespace BankNyBank.Utilites.AccountMethods
 {
     internal class Deposit : User
     {
-        static void DepositMenu(BankContext context, User user)
+        public static void DepositMenu(BankContext context, User user)
         {
             string pageHeader = "Please select account for the deposit:";
 

@@ -10,7 +10,7 @@ namespace BankNyBank.Utilites.AccountMethods
 {
     internal class Withdraw
     {
-        static void WithdrawMenu(BankContext context, User user)
+        public static void WithdrawMenu(BankContext context, User user)
         {
             string pageHeader = $"Please choose account to withdraw from:";
 

@@ -16,7 +16,7 @@ namespace BankNyBank.Utilites
         {
             while (true)
             {
-                Console.Write("Enter user name: ");
+                Console.Write("Username: ");
                 string userName = Console.ReadLine();
 
                 User user = FindUserByName(context, userName);
@@ -34,7 +34,6 @@ namespace BankNyBank.Utilites
                 }
                 else
                 {
-                    Console.Clear();
                     Console.WriteLine("No such user in the vault. Try again");
                 }
             }
@@ -45,24 +44,29 @@ namespace BankNyBank.Utilites
         {
             const int maxLoginAttempts = 3;
 
-            Console.Clear();
-            Console.WriteLine($"User '{user.Name}' found. Please enter the PIN.");
+            Console.WriteLine($"\nUser '{user.Name}' found. Please enter your PIN.");
 
             for (int i = 1; i <= maxLoginAttempts; i++)
             {
-                Console.Write("Enter PIN: ");
-                string pin = Console.ReadLine();
+                Console.Write("\nPIN: ");
 
-                if (user.Pin == pin)
+                string enteredPin = HidePin();
+
+                if (enteredPin == user.Pin)
                 {
+                    Console.WriteLine($"\nPIN correct. \n\nWelcome {user.Name}!\nLogging you in. Please stand by...");
+                    Thread.Sleep(4000);
                     return true;
                 }
-                else
+                else if (i < 2)
                 {
-                    Console.WriteLine($"Invalid PIN. Try again. {maxLoginAttempts - i} left.");
+                    Console.WriteLine($"\nInvalid PIN. Please try again. {maxLoginAttempts - i} tries left.");
+                }
+                if (i >= 2)
+                {
+                    Console.WriteLine($"\nInvalid PIN. Please try again. 1 try left.");
                 }
             }
-
             return false;
         }
 
@@ -105,13 +109,13 @@ namespace BankNyBank.Utilites
         // Method to put a user in a timeout if they input the wrong pin three times
         private static void Cooldown()
         {
-            const int jailTime = 180; // 3 min
-
             Console.Clear();
+            PrintLogo.PrintLockout();
             Console.WriteLine("You ran out of tries. Lockout timer initiated.");
-            for (int cooldown = jailTime; cooldown >= 0; cooldown--)
+            Console.CursorVisible = false;
+            for (int cooldown = 180; cooldown >= 0; cooldown--)
             {
-                Console.SetCursorPosition(0, 1);
+                Console.SetCursorPosition(0, 10);
                 int minutes = cooldown / 60;
                 int remainingcooldown = cooldown % 60;
                 Console.WriteLine($"\nTry again in: {minutes:D2}m {remainingcooldown:D2}s");

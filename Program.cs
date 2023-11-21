@@ -8,6 +8,8 @@ namespace BankNyBank
     {
         static void Main(string[] args)
         {
+            Console.Title = "BankNyBank Corporation";
+            Console.ForegroundColor = ConsoleColor.Yellow;
             using (BankContext context = new BankContext())
             {
                 if (IsDatabaseEmpty(context))
@@ -38,35 +40,18 @@ namespace BankNyBank
 
         public static void WelcomeScreen(BankContext context)
         {
-            string pageHeader = $" ~~~~ Welcome to bankbank! ~~~~\n" +
-                $"~~~~ Logging in or quitting ~~~~";
-            string[] menuOptions =
             {
-                "Login",
-                "Quit"
-            };
+                // Add while loop
+                PrintLogo.PrintBankNyBank();
+                Console.WriteLine("Welcome, valued customer!\n" +
+                    "______________________________________\n" +
+                    "\nPlease provide your login credentials:\n");
 
-            while (true)
-            {
-                int choice = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
-                Console.CursorVisible = true;
+                // Check user login method
+                User user = UserAuthentication.CheckLogIn(context);
 
-                switch (choice)
-                {
-                    case 1:
-                        Console.Clear();
-                        // Check user login input method
-                        User user = UserAuthentication.CheckLogIn(context);
-
-                        MenuManager.DisplayMenu(context, user);
-                        break;
-                    case 2:
-                        Console.Clear();
-                        Console.WriteLine("Closing down...");
-                        Thread.Sleep(1000);
-                        Environment.Exit(0);
-                        return;
-                }
+                // Call 'AdminMenu' or 'UserMenu' depending on username
+                MenuManager.DisplayMenu(context, user);
             }
         }
     }

@@ -93,7 +93,6 @@ namespace BankNyBank.Utilites
             Console.WriteLine("Lockout is over. Press Enter to go back to the start screen:");
             Console.ReadLine();
             
-
             return true;
         }
     }

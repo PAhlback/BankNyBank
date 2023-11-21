@@ -40,8 +40,10 @@ namespace BankNyBank
 
         public static void WelcomeScreen(BankContext context)
         {
+            // While loop to run the WelcomeScreen after logout
+            while (true)
             {
-                // Add while loop
+                Console.Clear();
                 PrintLogo.PrintBankNyBank();
                 Console.WriteLine("Welcome, valued customer!\n" +
                     "______________________________________\n" +

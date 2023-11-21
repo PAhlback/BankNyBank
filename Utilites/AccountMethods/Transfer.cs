@@ -112,7 +112,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 bool isParsed = false;
                 Console.Write("Enter amount to transfer: ");
                 string input = Console.ReadLine();
-                if (input.All(char.IsDigit))
+                if (input != "" && input.All(char.IsDigit))
                 {
                     transferAmount = double.Parse(input);
                     isParsed = true;
@@ -160,7 +160,7 @@ namespace BankNyBank.Utilites.AccountMethods
             Console.ReadLine();
         }
 
-        static Account GetSingleAccountFromUsersAccounts(BankContext context, User user, string msg)
+        private static Account GetSingleAccountFromUsersAccounts(BankContext context, User user, string msg)
         {
             string pageHeader = msg;
 

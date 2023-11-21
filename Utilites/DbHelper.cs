@@ -74,9 +74,7 @@ namespace BankNyBank.Utilites
             Console.ReadLine();
         }
 
-        // GetAccount
-
-        // Save deposit/alter balance
+        // Save deposit
         public static bool DepositToAccount(BankContext context, Account account, double depositAmount)
         {
             // Try catch
@@ -85,7 +83,7 @@ namespace BankNyBank.Utilites
             return true;
         }
 
-        // Save withdraw/alter balance
+        // Save withdraw
         public static bool WithdrawFromAccount(BankContext context, Account account, double withdrawalAmount)
         {
             // Add try catch

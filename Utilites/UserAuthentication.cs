@@ -19,7 +19,9 @@ namespace BankNyBank.Utilites
                 Console.Write("Username: ");
                 string userName = Console.ReadLine();
 
-                User user = FindUserByName(context, userName);
+                User user = context.Users
+                .Where(u => u.Name == userName)
+                .SingleOrDefault();
 
                 if (user != null)
                 {
@@ -29,7 +31,10 @@ namespace BankNyBank.Utilites
                         return user;
                     }
 
-                    Cooldown();
+                    if (Cooldown())
+                    {
+                        break;
+                    }
 
                 }
                 else
@@ -37,6 +42,7 @@ namespace BankNyBank.Utilites
                     Console.WriteLine("No such user in the vault. Try again");
                 }
             }
+            return null;
         }
 
         // Check to see if the user that put in the name knows the corresponding pin
@@ -107,12 +113,12 @@ namespace BankNyBank.Utilites
         }
 
         // Method to put a user in a timeout if they input the wrong pin three times
-        private static void Cooldown()
+        private static bool Cooldown()
         {
             Console.Clear();
             PrintLogo.PrintLockout();
             Console.WriteLine("You ran out of tries. Lockout timer initiated.");
-            Console.CursorVisible = false;
+            Console.CursorVisible = false;          
             for (int cooldown = 180; cooldown >= 0; cooldown--)
             {
                 Console.SetCursorPosition(0, 10);
@@ -121,11 +127,13 @@ namespace BankNyBank.Utilites
                 Console.WriteLine($"\nTry again in: {minutes:D2}m {remainingcooldown:D2}s");
                 Thread.Sleep(1000); // Sleep for 1 second to refresh timer properly
             }
+            Console.CursorVisible = true;
+            Console.Clear();
             Console.WriteLine("Lockout is over. Press Enter to go back to the start screen:");
             Console.ReadLine();
-            Console.Clear();
+            
+            return true;
         }
-
 
         public static User FindUserByName(BankContext context, string userName)
         {

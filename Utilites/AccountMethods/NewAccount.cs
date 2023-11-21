@@ -23,13 +23,14 @@ namespace BankNyBank.Utilites.AccountMethods
             do
             {
                 Console.Clear();
-                Console.WriteLine("\nWhat account type would you like it to be?\n'Salary' or 'savings' account?");
+                Console.WriteLine("\nWhat account type would you like it to be?\n'Salary' or 'Savings' account?");
                 Console.Write("\nAccount type: ");
                 accountType = Console.ReadLine().ToLower();
 
                 if (accountType != "salary" && accountType != "savings")
                 {
                     Console.WriteLine("\nYou did not choose a valid option. Please try again.\n");
+                    Console.ReadKey();
                 }
             }
             while (accountType != "salary" && accountType != "savings");
@@ -44,6 +45,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 {
                     Console.Clear();
                     Console.WriteLine("\nAccount name cannot be empty or less than 3 characters. Please try again.\n");
+                    Console.ReadKey();
                 }
                 else
                 {
@@ -52,6 +54,7 @@ namespace BankNyBank.Utilites.AccountMethods
                         Console.Clear();
                         Console.WriteLine("Account name already exists. Please choose a different name.");
                         newAccountName = null;
+                        Console.ReadKey();
                     }
                 }
             }

@@ -66,6 +66,42 @@ namespace BankNyBank.Utilites
             return false;
         }
 
+        // Replace user PIN input with '*'
+        public static string HidePin()
+        {
+            StringBuilder pin = new StringBuilder();
+
+            while (true)
+            {
+                // Use 'true' to hide which key is being pressed
+                ConsoleKeyInfo key = Console.ReadKey(true);
+
+                // Check if user press Backspace or Enter
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    pin.Append(key.KeyChar);
+                    Console.Write('*');
+                }
+                else if (key.Key == ConsoleKey.Backspace && pin.Length > 0)
+                {
+                    // Delete the last user input
+                    pin.Length -= 1;
+
+                    /* Visual representation of the deletion:
+                       Move cursor back one position, 
+                       overwrite '*' with a space character,
+                       move the cursor back one position.*/
+                    Console.Write("\b \b");
+                }
+
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    break;
+                }
+            }
+            return pin.ToString();
+        }
+
         // Method to put a user in a timeout if they input the wrong pin three times
         private static void Cooldown()
         {

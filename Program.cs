@@ -58,7 +58,10 @@ namespace BankNyBank
                         // Check user login input method
                         User user = UserAuthentication.CheckLogIn(context);
 
-                        MenuManager.DisplayMenu(context, user);
+                        if (user != null)
+                        {
+                            MenuManager.DisplayMenu(context, user);
+                        }
                         break;
                     case 2:
                         Console.Clear();

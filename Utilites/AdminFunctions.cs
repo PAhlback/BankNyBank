@@ -33,7 +33,7 @@ namespace BankNyBank.Utilites
                     switch (command)
                     {
                         case 1:
-                            DisplayUsers(context, users);
+                            DisplayUsers(users);
                             break;
                         case 2:
                             CreateUser(context);
@@ -53,7 +53,7 @@ namespace BankNyBank.Utilites
             }
         }
 
-        private static void DisplayUsers(BankContext context, List<User> users)
+        private static void DisplayUsers(List<User> users)
         {
             Console.WriteLine("Current users in system: ");
             foreach (User user in users)

@@ -95,5 +95,12 @@ namespace BankNyBank.Utilites
             
             return true;
         }
+
+        public static User FindUserByName(BankContext context, string userName)
+        {
+            return context.Users
+                .Where(u => u.Name == userName)
+                .SingleOrDefault();
+        }
     }
 }

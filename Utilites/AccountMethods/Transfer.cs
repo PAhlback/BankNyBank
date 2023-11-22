@@ -93,7 +93,6 @@ namespace BankNyBank.Utilites.AccountMethods
             // Display the new balance of the accounts transfered between
             Console.WriteLine("\nNew account balances:\n");
             DbHelper.PrintOneAccount(acc1.Name, acc1.AccountType, acc1.Balance.ToString("N2"), acc1.Currency);
-            DbHelper.PrintOneAccount(acc2.Name, acc2.AccountType, acc2.Balance.ToString("N2"), acc2.Currency);
 
             Console.WriteLine("Press ENTER to return to menu");
             Console.ReadLine();
@@ -200,8 +199,10 @@ namespace BankNyBank.Utilites.AccountMethods
                         .Where(a => a.User.Name == foreignUser.Name).ToList();
                     Account foundAccount = foreignAccounts.Find(a => a.Name == accountNameForeignUser);
 
+                    
+
                     // Checks to make sure an account from the foreign user was found.
-                    if (foundAccount.Name == null)
+                    if (foundAccount == null)
                     {
                         string pageHeader2 = $"Could not find account with name {accountNameForeignUser}";
                         choice = MenuManager.DisplayAndGetMenuChoice(pageHeader2, menuOptions2);

@@ -39,7 +39,7 @@ namespace BankNyBank.Utilites.AccountMethods
                Since arrays begin at 0 (zero-indexed) the empty string will always be assigned after the last account.
 
                Example with three accounts: Index will be equal to 3.
-               [ " Account1", " Account2", " Account3", "", "" ]
+               [ "Account1", "Account2", "Account3", "", "" ]
             
                Space between the listed accounts and "Return to main menu"
                make it easier to distinguish between accounts and user option */
@@ -86,14 +86,20 @@ namespace BankNyBank.Utilites.AccountMethods
                     while (!validInput)
                     {
                         // Check if the input from the user is correct and parsing it to a double.
-                        if (double.TryParse(Console.ReadLine(), out withdrawalAmount) && withdrawalAmount < selectedAccount.Balance)
+                        if (double.TryParse(Console.ReadLine(), out withdrawalAmount) && withdrawalAmount > 0 && withdrawalAmount < selectedAccount.Balance)
                         {
                             Console.WriteLine($"\nWithdrawal amount: {withdrawalAmount:N2} {selectedAccount.Currency} confirmed.");
                             validInput = true;
                         }
+                        else if (withdrawalAmount > selectedAccount.Balance)
+                        {
+                            Console.WriteLine("\nInvalid input. Insufficient funds.");
+                            Console.Write("\nPlease enter withdrawal amount: ");
+                        }
                         else
                         {
-                            Console.WriteLine("\nInvalid input. Please enter a withdrawal amount within your balance.");
+                            Console.WriteLine("\nInvalid input.");
+                            Console.Write("\nPlease enter withdrawal amount: ");
                         }
                     }
 

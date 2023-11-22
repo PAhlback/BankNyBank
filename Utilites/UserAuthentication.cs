@@ -115,11 +115,13 @@ namespace BankNyBank.Utilites
         // Method to put a user in a timeout if they input the wrong pin three times
         private static bool Cooldown()
         {
+            const int jailTime = 180; // 3 min
+
             Console.Clear();
             PrintLogo.PrintLockout();
             Console.WriteLine("You ran out of tries. Lockout timer initiated.");
             Console.CursorVisible = false;          
-            for (int cooldown = 180; cooldown >= 0; cooldown--)
+            for (int cooldown = jailTime; cooldown >= 0; cooldown--)
             {
                 Console.SetCursorPosition(0, 10);
                 int minutes = cooldown / 60;

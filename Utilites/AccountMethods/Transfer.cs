@@ -16,6 +16,7 @@ namespace BankNyBank.Utilites.AccountMethods
             // are used later (and which needs to be used outside of where they are given values.
             string pageHeader = "Transfer to other user?";
             string[] menuOptions = { "Yes", "No" };
+            string msg;
 
             int toOtherUser = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
 
@@ -32,9 +33,24 @@ namespace BankNyBank.Utilites.AccountMethods
                     return;
                 }
             }
+
+            while (true)
+            {
+                msg = "~~~~ Select account to transfer from ~~~~";
+                Account acc1 = GetSingleAccountFromUsersAccounts(context, user, msg);
+
+                if (acc1.Balance <= 0)
+                {
+                    Console.WriteLine("Unable to transfer from account. Account balance can't be equal to or less than 0");
+                    Console.WriteLine("Press ENTER to continue or \"x\" to exit");
+                    string check = Console.ReadLine();
+                    if (check == "x")
+                    {
+                        return;
+                    }
+                }
+            }
             
-            string msg = "~~~~ Select account to transfer from ~~~~";
-            Account acc1 = GetSingleAccountFromUsersAccounts(context, user, msg);
 
             if (toOtherUser == 2)
             {

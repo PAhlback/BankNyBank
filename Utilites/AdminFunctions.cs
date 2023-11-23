@@ -45,9 +45,6 @@ namespace BankNyBank.Utilites
                             Console.WriteLine("\nFarewell!");
                             Thread.Sleep(1000);
                             return;
-                        default:
-                            Console.WriteLine($"Unknown command: {command}");
-                            break;
                     }
                 }
             }

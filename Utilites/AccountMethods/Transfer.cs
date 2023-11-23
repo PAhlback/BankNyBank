@@ -93,6 +93,10 @@ namespace BankNyBank.Utilites.AccountMethods
             // Display the new balance of the accounts transfered between
             Console.WriteLine("\nNew account balances:\n");
             DbHelper.PrintOneAccount(acc1.Name, acc1.AccountType, acc1.Balance.ToString("N2"), acc1.Currency);
+            if (acc2.User.Name == acc1.User.Name)
+            {
+                DbHelper.PrintOneAccount(acc2.Name, acc2.AccountType, acc2.Balance.ToString("N2"), acc2.Currency);
+            }
 
             Console.WriteLine("Press ENTER to return to menu");
             Console.ReadLine();

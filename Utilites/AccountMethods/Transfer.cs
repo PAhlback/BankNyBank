@@ -10,6 +10,8 @@ namespace BankNyBank.Utilites.AccountMethods
 {
     internal class Transfer
     {
+        private static bool FirstAccountSelected = false;
+
         public static void TransferBetweenAccounts(BankContext context, User user)
         {
             // Check if user wants to transfer to another user, and declares some variables that 
@@ -34,6 +36,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 }
             }
 
+            // CHECK HERE
             Account acc1 = new Account();
 
             while (true)
@@ -56,7 +59,7 @@ namespace BankNyBank.Utilites.AccountMethods
                     break;
                 }
             }
-            
+            // TO HERE
 
             if (toOtherUser == 2)
             {
@@ -122,11 +125,20 @@ namespace BankNyBank.Utilites.AccountMethods
 
         private static Account GetSingleAccountFromUsersAccounts(BankContext context, User user, string msg)
         {
-            string pageHeader = msg;
-
+            // CHECK HERE
             var accountList = context.Accounts
                 .Where(u => u.User.Id == user.Id)
+                .Where(a => a.Balance > 0)
                 .ToList();
+            FirstAccountSelected = true;
+
+            if (FirstAccountSelected)
+            {
+                 accountList = context.Accounts
+                .Where(u => u.User.Id == user.Id)
+                .ToList();
+            }
+            // TO HERE
 
             string[] menuOptions = new string[accountList.Count];
 
@@ -135,7 +147,7 @@ namespace BankNyBank.Utilites.AccountMethods
                 menuOptions[i] = accountList[i].Name;
             }
 
-            int choice = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
+            int choice = MenuManager.DisplayAndGetMenuChoice(msg, menuOptions);
 
             return accountList[choice - 1];
         }

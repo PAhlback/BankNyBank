@@ -13,6 +13,8 @@ namespace BankNyBank.Utilites.AccountMethods
         //Method for letting the user create a new account.
         public static void OpenNewAccount(BankContext context, User user)
         {
+            bool currencyTypeSelected = false;
+            bool accountTypeSelected = false;
             string newAccountName = "";
             string accountType = "";
 
@@ -20,20 +22,29 @@ namespace BankNyBank.Utilites.AccountMethods
             Console.WriteLine("\nYou are about to create a new account.\n(Press any key to continue.)");
             Console.ReadKey();
 
-            do
+            while (!accountTypeSelected)
             {
                 Console.Clear();
-                Console.WriteLine("\nWhat account type would you like it to be?\n'Salary' or 'Savings' account?");
-                Console.Write("\nAccount type: ");
-                accountType = Console.ReadLine().ToLower();
+                List<User> users = DbHelper.GetAllUsers(context);
 
-                if (accountType != "salary" && accountType != "savings")
+                string pageHeader = "~~~~ What account type would you like it to be? ~~~~\n" +
+                    "   ~~~~ 'Salary' or 'Savings' account? ~~~~";
+                string[] menuOptions = { "Salary", "Savings" };
+
+                int command = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
+
+                switch (command)
                 {
-                    Console.WriteLine("\nYou did not choose a valid option. Please try again.\n");
-                    Console.ReadKey();
+                    case 1:
+                        accountType = "salary";
+                        accountTypeSelected = true;
+                        break;
+                    case 2:
+                        accountType = "savings";
+                        accountTypeSelected = true;
+                        break;
                 }
             }
-            while (accountType != "salary" && accountType != "savings");
 
             do
             {
@@ -60,21 +71,36 @@ namespace BankNyBank.Utilites.AccountMethods
             }
             while (string.IsNullOrWhiteSpace(newAccountName) || newAccountName.Length < 3);
 
-            string currency;
-            do
-            {
-                Console.WriteLine("Choose a currency for the account (SEK, EUR, USD):");
-                Console.Write("Currency: ");
-                currency = Console.ReadLine().ToUpper();
+            string currency = "";
 
-                if (currency != "SEK" && currency != "EUR" && currency != "USD")
+            while (!currencyTypeSelected)
+            {
+                Console.Clear();
+                List<User> users = DbHelper.GetAllUsers(context);
+
+                string pageHeader = "~~~~ What currency type would you like it to be? ~~~~\n" +
+                    "   ~~~~ 'SEK', 'EUR' or 'USD' account? ~~~~";
+                string[] menuOptions = { "SEK", "EUR", "USD" };
+
+                int command = MenuManager.DisplayAndGetMenuChoice(pageHeader, menuOptions);
+
+                switch (command)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Invalid input, choose the correct currency availble.");
-                    Console.ReadKey();
+                    case 1:
+                        currency = "SEK";
+                        currencyTypeSelected = true;
+                        break;
+                    case 2:
+                        currency = "EUR";
+                        currencyTypeSelected = true;
+                        break;
+                    case 3:
+                        currency = "USD";
+                        currencyTypeSelected = true;
+                        break;
+
                 }
             }
-            while (currency != "SEK" && currency != "EUR" && currency != "USD");
 
             Console.Clear();
             Console.WriteLine($"\nYour account name will be called {newAccountName} with currency {currency}.\n(Press any key to continue.)");

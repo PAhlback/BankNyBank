@@ -45,6 +45,8 @@ During the development, we found it to be very helpful and easier to work with s
 
 This structure provides easy access and overview to all code, related to the functions for the user.
 
+The user menu itself is located in the User class under Models.
+
 ### DbHelper
 All interactions with the values in the database are handled through the DbHelper class.
 

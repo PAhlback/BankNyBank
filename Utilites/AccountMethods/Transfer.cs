@@ -49,6 +49,10 @@ namespace BankNyBank.Utilites.AccountMethods
                         return;
                     }
                 }
+                else
+                {
+                    break;
+                }
             }
             
 

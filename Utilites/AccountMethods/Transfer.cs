@@ -34,10 +34,12 @@ namespace BankNyBank.Utilites.AccountMethods
                 }
             }
 
+            Account acc1 = new Account();
+
             while (true)
             {
                 msg = "~~~~ Select account to transfer from ~~~~";
-                Account acc1 = GetSingleAccountFromUsersAccounts(context, user, msg);
+                acc1 = GetSingleAccountFromUsersAccounts(context, user, msg);
 
                 if (acc1.Balance <= 0)
                 {

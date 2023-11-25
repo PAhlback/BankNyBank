@@ -2,6 +2,7 @@
 using BankNyBank.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,12 +72,27 @@ namespace BankNyBank.Utilites.AccountMethods
                         Console.Write("=");
                     }
 
-
                     /* Get the selected account from the context and display current balance.
                        Since account names must be unique at creation, we know that we will retrieve the correct one */
                     Account selectedAccount = context.Accounts.FirstOrDefault(a => a.User.Id == user.Id && a.Name == selectedAccountName);
 
                     Console.WriteLine($"\n\nCurrent balance: {selectedAccount.Balance:N2} {selectedAccount.Currency}");
+
+
+                    if (selectedAccount.Balance == 0)
+                    {
+                        Console.CursorVisible = false;
+                        Console.WriteLine("\nNo funds available.");
+                        Console.WriteLine("\nPress ESCAPE to return to main menu.");
+
+                        // Wait for user to press the ESCAPE key explicitly. Do nothing until ESCAPE key is pressed.
+                        while (Console.ReadKey(true).Key != ConsoleKey.Escape) { }
+                        {
+                            Console.WriteLine("\nReturning to main menu...");
+                            Thread.Sleep(1000);
+                            return;
+                        }
+                    }
 
                     Console.Write("\nPlease enter withdrawal amount: ");
 
@@ -85,7 +101,7 @@ namespace BankNyBank.Utilites.AccountMethods
                     double withdrawalAmount = 0;
                     while (!validInput)
                     {
-                        // Check if the input from the user is correct and parsing it to a double.
+                        // Take input from user and check if the input is correct and convert it to a double.
                         if (double.TryParse(Console.ReadLine(), out withdrawalAmount) && withdrawalAmount > 0 && withdrawalAmount < selectedAccount.Balance)
                         {
                             Console.WriteLine($"\nWithdrawal amount: {withdrawalAmount:N2} {selectedAccount.Currency} confirmed.");
@@ -94,9 +110,9 @@ namespace BankNyBank.Utilites.AccountMethods
                         else if (withdrawalAmount > selectedAccount.Balance)
                         {
                             Console.WriteLine("\nInvalid input. Insufficient funds.");
-                            Console.Write("\nPlease enter withdrawal amount: ");
+                            Console.Write("\nPlease enter a withdrawal amount within your balance: ");
                         }
-                        else
+                        else if (withdrawalAmount <= 0)
                         {
                             Console.WriteLine("\nInvalid input.");
                             Console.Write("\nPlease enter withdrawal amount: ");
@@ -121,7 +137,7 @@ namespace BankNyBank.Utilites.AccountMethods
                             Console.WriteLine("\nPress ENTER to return to the main menu.");
                             // Wait for user to press the ENTER key
                             while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
-                            Console.WriteLine("Returning to the main menu...");
+                            Console.WriteLine("\nReturning to the main menu...");
                             Thread.Sleep(1000);
                             return;
                         }

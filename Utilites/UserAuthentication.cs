@@ -19,9 +19,7 @@ namespace BankNyBank.Utilites
                 Console.Write("Username: ");
                 string userName = Console.ReadLine();
 
-                User user = context.Users
-                .Where(u => u.Name == userName)
-                .SingleOrDefault();
+                User user = FindUserByName(context, userName);
 
                 if (user != null)
                 {

@@ -59,7 +59,7 @@ namespace BankNyBank.Utilites
                 if (enteredPin == user.Pin)
                 {
                     Console.WriteLine($"\nPIN correct. \n\nWelcome {user.Name}!\nLogging you in. Please stand by...");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(2000);
                     return true;
                 }
                 else if (i < 2)

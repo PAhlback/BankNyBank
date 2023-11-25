@@ -94,19 +94,37 @@ namespace BankNyBank.Utilites
         // Save deposit
         public static bool DepositToAccount(BankContext context, Account account, double depositAmount)
         {
-            // Try catch
-            account.Balance += depositAmount;
-            context.SaveChanges();
-            return true;
+            try
+            {
+                account.Balance += depositAmount;
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Deposit unsuccessful. The following error occured: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                return false;
+            }
         }
 
-        // Save withdraw
+        // Save withdrawal
         public static bool WithdrawFromAccount(BankContext context, Account account, double withdrawalAmount)
         {
-            // Add try catch
-            account.Balance -= withdrawalAmount;
-            context.SaveChanges();
-            return true;
+            try
+            {
+                account.Balance -= withdrawalAmount;
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Withdrawal unsuccessful. The following error occured:: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                return false;
+            }
         }
 
         public static void PrintOneAccount(string name, string accountType, string balance, string currency)

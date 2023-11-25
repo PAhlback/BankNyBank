@@ -82,9 +82,10 @@ namespace BankNyBank.Utilites.AccountMethods
                         if (double.TryParse(Console.ReadLine(), out double depositAmount) && depositAmount > 0)
                         {
                             // Add funds to the chosen account and confirm the deposit to the user.
-                            selectedAccount.Balance += depositAmount;
-                            context.SaveChanges();
+                            DbHelper.DepositToAccount(context, selectedAccount, depositAmount);
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine($"Deposit successful.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine($"\nNew balance of account {selectedAccount.Name}: {selectedAccount.Balance:N2} {selectedAccount.Currency}");
                             validInput = true;
                             Console.WriteLine("\nPress ENTER to return to the main menu.");

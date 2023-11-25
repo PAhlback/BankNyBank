@@ -108,25 +108,41 @@ namespace BankNyBank.Utilites.AccountMethods
             Console.WriteLine("Please wait.. Your account is being created...");
             Thread.Sleep(3000);
 
-            Account newAccount = new Account
+            try
             {
-                UserId = user.Id,
-                Name = newAccountName,
-                Balance = 0,
-                AccountType = accountType,
-                Currency = currency
-            };
-            context.Accounts.Add(newAccount);
-            context.SaveChanges();
+                Account newAccount = new Account
+                {
+                    UserId = user.Id,
+                    Name = newAccountName,
+                    Balance = 0,
+                    AccountType = accountType,
+                    Currency = currency
+                };
 
-            Console.Clear();
-            Console.WriteLine("\nYou have successfully created a new account.\n");
-            Console.WriteLine($"\tNew Account Information:\n\t~~~~~~~~~~~~~~~~~~~~~~~~\n\tName: \t\t{newAccountName}\n\tType: \t\t{accountType}\n\tCurrency: \t{currency}");
-            Console.WriteLine("\nPress ENTER to return to main menu.");
-            Console.ReadKey();
-            Console.WriteLine("Returning to main menu...");
-            Thread.Sleep(1000);
-            return;
+                context.Accounts.Add(newAccount);
+                context.SaveChanges();
+
+                Console.Clear();
+                Console.WriteLine("\nYou have successfully created a new account.\n");
+                Console.WriteLine($"\tNew Account Information:\n\t~~~~~~~~~~~~~~~~~~~~~~~~\n\tName: \t\t{newAccountName}\n\tType: \t\t{accountType}\n\tCurrency: \t{currency}");
+                Console.WriteLine("\nPress ENTER to return to the main menu.");
+                Console.ReadKey();
+                Console.WriteLine("Returning to the main menu...");
+                Thread.Sleep(1000);
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Error during account creation: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Press ENTER to return to the main menu.");
+                Console.ReadKey();
+                Console.WriteLine("Returning to the main menu...");
+                Thread.Sleep(1000);
+                return;
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ The user menu itself is located in the User class under Models.
 All interactions with the values in the database are handled through the DbHelper class.
 
 ## Credits
-- **Pontus Ahlbäck** - [PAhlback](https://github.com/PAhlback)
-- **Emil Ejderklev** - [SurrealEmil](https://github.com/SurrealEmil)
-- **Dennis Briffa** - [Balos87](https://github.com/Balos87)
-- **Filip Nilsson** - [filip-io](https://github.com/filip-io)
+- **Pontus Ahlbäck** [PAhlback](https://github.com/PAhlback)
+- **Emil Ejderklev** [SurrealEmil](https://github.com/SurrealEmil)
+- **Dennis Briffa** [Balos87](https://github.com/Balos87)
+- **Filip Nilsson** [filip-io](https://github.com/filip-io)

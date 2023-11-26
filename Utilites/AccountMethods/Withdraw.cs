@@ -82,7 +82,9 @@ namespace BankNyBank.Utilites.AccountMethods
                     if (selectedAccount.Balance == 0)
                     {
                         Console.CursorVisible = false;
-                        Console.WriteLine("\nNo funds available.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNo funds available. Withdrawal not possible.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("\nPress ESCAPE to return to main menu.");
 
                         // Wait for user to press the ESCAPE key explicitly. Do nothing until ESCAPE key is pressed.
@@ -130,9 +132,10 @@ namespace BankNyBank.Utilites.AccountMethods
                             pinConfirmed = true;
 
                             // Withdraw funds from the chosen account and confirm the withdrawal to the user.
-                            selectedAccount.Balance -= withdrawalAmount;
-                            context.SaveChanges();
+                            DbHelper.DepositToAccount(context, selectedAccount, withdrawalAmount);
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine($"\nWithdrawal successful.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine($"\nNew balance of account {selectedAccount.Name}: {selectedAccount.Balance:N2} {selectedAccount.Currency}");
                             Console.WriteLine("\nPress ENTER to return to the main menu.");
                             // Wait for user to press the ENTER key

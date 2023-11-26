@@ -34,7 +34,7 @@ namespace BankNyBank
             Console.WriteLine("Admin user added to the database on finding the database empty.\n" +
                 "Name = admin\n" +
                 "Pin = 1234");
-
+                
             return adminUser;
         }
 
